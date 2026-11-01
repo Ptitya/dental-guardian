@@ -1,0 +1,190 @@
+import reflex as rx
+from dental_clinic_system.components import header, footer
+
+def service_card(image_url: str, title: str, icon_tag: str) -> rx.Component:
+    return rx.box(
+        rx.box(
+            rx.center(
+                rx.icon(tag=icon_tag, size=24, color="var(--primary-color)"),
+                position="absolute",
+                top="16px",
+                left="16px",
+                background_color="white",
+                padding="12px",
+                border_radius="16px",
+                box_shadow="0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                z_index="10",
+            ),
+            rx.image(src=image_url, height={"initial": "180px", "md": "224px"}, width="100%", object_fit="cover", border_radius="16px"),
+            position="relative",
+            margin_bottom="20px",
+        ),
+        rx.center(
+            rx.text(title, weight="medium", size="5", color="var(--slate-12)", margin_bottom="8px"),
+        ),
+        padding={"initial": "16px", "md": "24px"},
+        border_radius="24px",
+        background_color="white",
+        box_shadow="0 10px 40px -10px rgba(0,0,0,0.08)",
+        class_name="hover-lift",
+        width="100%",
+        flex_shrink="0",
+    )
+
+@rx.page(route="/", title="Dental Guardian - หน้าแรก")
+def home() -> rx.Component:
+    return rx.box(
+        # Top Section with light background
+        rx.box(
+            header(),
+            rx.container(
+                rx.flex(
+                    rx.vstack(
+                        rx.heading(
+                            # each phrase stays on one line; wrapping only happens between them
+                            rx.text.span("รอยยิ้มสวย", display="inline-block", white_space="nowrap", margin_right="0.3em"),
+                            rx.text.span("เริ่มต้นที่นี่", display="inline-block", white_space="nowrap"),
+                            size={"initial": "8", "md": "9"},
+                            weight="bold",
+                            class_name="gradient-text",
+                            line_height="1.3",
+                            margin_bottom="16px",
+                        ),
+                        rx.text(
+                            "สัมผัสประสบการณ์การดูแลสุขภาพช่องปากระดับโลกกับทีมผู้เชี่ยวชาญของเรา พร้อมเทคโนโลยีที่ทันสมัยเพื่อรอยยิ้มที่สดใสและสุขภาพดีของคุณ",
+                            size={"initial": "3", "md": "5"},
+                            color="var(--slate-10)",
+                            margin_bottom={"initial": "24px", "md": "32px"},
+                            line_height="1.8",
+                            max_width="500px",
+                        ),
+                        rx.hstack(
+                            rx.box(
+                                rx.text("นัดหมายล่วงหน้า", weight="medium", color="white", white_space="nowrap"),
+                                background_image="linear-gradient(135deg, #7C69AC 0%, #604a96 100%)",
+                                padding_x="32px",
+                                padding_y="12px",
+                                border_radius="9999px",
+                                box_shadow="0 8px 20px -6px rgba(124, 105, 172, 0.6)",
+                                transition="all 0.3s ease",
+                                _hover={"transform": "translateY(-3px)", "box_shadow": "0 12px 25px -6px rgba(124, 105, 172, 0.8)", "opacity": "0.95"},
+                                cursor="pointer",
+                                on_click=rx.redirect("/booking"),
+                            ),
+                            rx.box(
+                                rx.text("บริการของเรา", weight="medium", color="var(--primary-color)", white_space="nowrap"),
+                                background_color="var(--primary-light)",
+                                padding_x="32px",
+                                padding_y="12px",
+                                border_radius="9999px",
+                                transition="all 0.3s ease",
+                                _hover={"background_color": "#e4ddef"},
+                                cursor="pointer",
+                                on_click=rx.redirect("/#services"),
+                            ),
+                            spacing="3",
+                            align="center",
+                            wrap="wrap",
+                        ),
+
+                        align="start",
+                        justify="center",
+                        height="100%",
+                        padding_right={"initial": "0", "md": "32px"},
+                        class_name="animate-fade-in",
+                        flex="1",
+                    ),
+                    rx.box(
+                        rx.image(
+                            src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800",
+                            border_radius="32px",
+                            box_shadow="0 25px 50px -12px rgba(0,0,0,0.15)",
+                            height={"initial": "240px", "md": "400px"},
+                            width="100%",
+                            object_fit="cover",
+                            class_name="animate-float",
+                        ),
+                        width="100%",
+                        display="block",
+                        class_name="animate-slide-in",
+                        flex="1",
+                    ),
+                    direction={"initial": "column", "md": "row"},
+                    gap={"initial": "32px", "md": "48px"},
+                    padding_y={"initial": "16px", "md": "32px"},
+                    padding_x={"initial": "4px", "md": "0"},
+                    align="center",
+                    position="relative",
+                    z_index="10",
+                ),
+                # Decorative background elements
+                rx.box(
+                    position="absolute",
+                    top="-5%",
+                    left="-10%",
+                    width="300px",
+                    height="300px",
+                    background_color="#D8B4FE",
+                    opacity="0.3",
+                    filter="blur(60px)",
+                    border_radius="50%",
+                    class_name="animate-float",
+                    z_index="0",
+                ),
+                rx.box(
+                    position="absolute",
+                    bottom="10%",
+                    right="-5%",
+                    width="250px",
+                    height="250px",
+                    background_color="#93C5FD",
+                    opacity="0.3",
+                    filter="blur(60px)",
+                    border_radius="50%",
+                    class_name="animate-float",
+                    animation_delay="2s",
+                    z_index="0",
+                ),
+                position="relative",
+                overflow="hidden",
+            ),
+            class_name="gradient-bg-animated",
+            padding_bottom="16px",
+            border_bottom_left_radius="40px",
+            border_bottom_right_radius="40px",
+            box_shadow="sm",
+            margin_bottom="16px",
+        ),
+
+        # Services Section (Simplified to match the plain look)
+        rx.container(
+            rx.center(
+                rx.vstack(
+                    rx.heading("บริการทางทันตกรรมของเรา", size={"initial": "6", "md": "8"}, weight="bold", color="var(--slate-12)",
+                               margin_bottom={"initial": "24px", "md": "48px"}, text_align="center", class_name="animate-fade-in-delayed"),
+                    # Services Grid
+                    rx.grid(
+                        service_card("https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=400", "ตรวจสุขภาพ & เอกซเรย์", "activity"),
+                        service_card("https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=400", "ขูดหินปูน & ขัดฟัน", "wrench"),
+                        service_card("https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=400", "อุดฟัน & ถอนฟัน", "smile"),
+                        columns={"initial": "1", "sm": "2", "md": "3"},
+                        spacing={"initial": "4", "md": "8"},
+                        width="100%",
+                        class_name="animate-fade-in-delayed",
+                    ),
+                    width="100%",
+                    align_items="center",
+                ),
+                width="100%",
+                padding_top="32px",
+                padding_bottom={"initial": "40px", "md": "64px"},
+                padding_x={"initial": "4px", "md": "0"},
+                background_color="white", 
+                id="services",
+            ),
+        ),
+        
+        footer(),
+        background_color="white",
+        min_height="100vh",
+    )
